@@ -1,25 +1,20 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
-    <b-button>Button</b-button>
-    <b-button variant="danger">Button</b-button>
-    <b-button variant="success">Button</b-button>
-    <b-button variant="outline-primary">Button</b-button>
+    <MoviesList :list="moviesList" />
   </div>
 </template>
 
 <script>
-import { mapActions } from "vuex";
-import HelloWorld from "./components/HelloWorld.vue";
+import { mapActions, mapGetters } from "vuex";
+import MoviesList from "@/components/MoviesList";
 
 export default {
   name: "App",
   components: {
-    HelloWorld,
+    MoviesList,
   },
-  mounted() {
-    this.fetchMovies();
+  computed: {
+    ...mapGetters("movies", ["moviesList"]),
   },
   methods: {
     ...mapActions("movies", ["fetchMovies"]),
@@ -29,11 +24,8 @@ export default {
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: Avenir, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
